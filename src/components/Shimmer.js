@@ -1,8 +1,8 @@
 const Shimmer = () => {
   return (
-    <>
-      <h1>Shimmer UI Loading........</h1>;
-    </>
+    <div>
+      <h1>Shimmer UI Loading........</h1>
+    </div>
   );
 };
 

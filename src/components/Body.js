@@ -30,7 +30,13 @@ const Body = () => {
     setFillteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
-  return fillteredRestaurants === 0 ? (
+  // not render component (early return)
+  if (!allRestaurants) return null;
+
+  if (fillteredRestaurants?.length === 0)
+    return <h1>No Restaurant match your Filter!!</h1>;
+
+  return allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
