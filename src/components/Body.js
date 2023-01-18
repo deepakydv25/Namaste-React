@@ -2,6 +2,7 @@ import { restaurantList } from "../config";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchInput, restaurants) {
   return restaurants.filter((restaurant) =>
@@ -31,10 +32,10 @@ const Body = () => {
   }
 
   // not render component (early return)
-  if (!allRestaurants) return null;
+  // if (!allRestaurants) return null;
 
-  if (fillteredRestaurants?.length === 0)
-    return <h1>No Restaurant match your Filter!!</h1>;
+  // if (fillteredRestaurants?.length === 0)
+  //   return <h1>No Restaurant match your Filter!!</h1>;
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />
@@ -66,7 +67,12 @@ const Body = () => {
       <div className="restaurant-list">
         {fillteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+            <Link
+              to={"/restaurant/" + restaurant.data.id}
+              key={restaurant.data.id}
+            >
+              <RestaurantCard {...restaurant.data} />
+            </Link>
           );
         })}
       </div>
