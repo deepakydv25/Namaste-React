@@ -3,12 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchInput, restaurants) {
-  return restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase()?.includes(searchInput.toLowerCase())
-  );
-}
+import { filterData } from "../utils/Helper";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -31,11 +27,11 @@ const Body = () => {
     setFillteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
-  // not render component (early return)
-  // if (!allRestaurants) return null;
+  // const isOnline = useOnline();
 
-  // if (fillteredRestaurants?.length === 0)
-  //   return <h1>No Restaurant match your Filter!!</h1>;
+  // if (!isOnline) {
+  //   return <h1>Offline, please check your internet connection!!</h1>;
+  // }
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />
