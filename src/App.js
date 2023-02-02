@@ -16,11 +16,11 @@ const Instamart = lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
   return (
-    <>
+    <div>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 
@@ -49,7 +49,7 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/restaurant/:id",
+        path: "/restaurant/:resId",
         element: <RestaurantMenu />,
       },
       {

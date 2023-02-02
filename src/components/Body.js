@@ -1,10 +1,11 @@
-import { restaurantList } from "../config";
+import { restaurantList, SWIGGY_URL } from "../config";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/Helper";
 import useOnline from "../utils/useOnline";
+import Coursel from "./Coursel";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -17,38 +18,33 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.2027489&lng=72.95860569999999&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
+    const data = await fetch(SWIGGY_URL);
+    const json = await data?.json();
 
     // Optional Chaining
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFillteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
-  // const isOnline = useOnline();
-
-  // if (!isOnline) {
-  //   return <h1>Offline, please check your internet connection!!</h1>;
-  // }
-
   return allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div>
+        <Coursel />
+      </div>
+      <div className="pl-2 my-3 mx-[144px]">
         <input
           type="text"
-          className="search-input"
-          placeholder="Search"
+          className="placeholder:italic bg-white border border-slate-300 rounded-full py-1 pl-9 pr-3 shadow-sm focus:outline-none focus:border-orange focus:ring-orange focus:ring-1"
+          placeholder="Search Restaunrant..."
           value={searchInput}
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
         />
         <button
-          className="search-btn"
+          className="bg-orange border border-white rounded-full py-1 px-5 ml-7 text-cyan-50 hover:bg-white hover:text-orange hover:border-orange"
           onClick={() => {
             // need to filete the data
             const data = filterData(searchInput, allRestaurants);
@@ -60,8 +56,8 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
-        {fillteredRestaurants.map((restaurant) => {
+      <div className="flex flex-wrap px-2 py-4 mx-[144px]">
+        {fillteredRestaurants?.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.data.id}
