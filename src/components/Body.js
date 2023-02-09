@@ -33,11 +33,11 @@ const Body = () => {
       <div>
         <Coursel />
       </div>
-      <div className="pl-2 my-3 mx-[144px]">
+      <div className="pl-2 my-5 mx-[144px] flex justify-center">
         <input
           type="text"
-          className="placeholder:italic bg-white border border-slate-300 rounded-full py-1 pl-9 pr-3 shadow-sm focus:outline-none focus:border-orange focus:ring-orange focus:ring-1"
-          placeholder="Search Restaunrant..."
+          className="placeholder:italic bg-white border border-slate-300 rounded-full py-1 pl-9 pr-[300px] shadow-sm focus:outline-none focus:border-orange focus:ring-orange focus:ring-1"
+          placeholder="Search Restaurant..."
           value={searchInput}
           onChange={(e) => {
             setSearchInput(e.target.value);

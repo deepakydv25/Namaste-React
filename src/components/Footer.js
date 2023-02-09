@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
+
 const Footer = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="bg-[rgb(0,0,0)] text-white relative">
       <div className="flex">
@@ -30,16 +35,19 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="px-[144px] flex">
+      <div className="px-[144px] flex flex-col">
         <span>FoodVilla</span>
         <div>
           <span>© 2023 FoodVilla</span>
         </div>
-        <div>
+        <div className="flex flex-row">
           <span>Facebook</span>
           <span>Instagram</span>
           <span>Twitter</span>
         </div>
+        <span className="">
+          {user.name} - {user.email}
+        </span>
       </div>
     </div>
   );

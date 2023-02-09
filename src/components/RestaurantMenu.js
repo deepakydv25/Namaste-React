@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL, NON_VEG_IMG, VEG_IMG } from "../config";
+import { addItem } from "../utils/cartSlice";
 import useRestaurant from "../utils/useRestaurant";
 import Shimmer from "./Shimmer";
 
@@ -8,6 +10,12 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
 
   const restaurant = useRestaurant(resId);
+
+  const dispatch = useDispatch();
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return !restaurant ? (
     <Shimmer />
@@ -58,10 +66,18 @@ const RestaurantMenu = () => {
                     {item?.description}
                   </li>
                 </div>
-                <img
-                  className="w-[137px] mr-5"
-                  src={IMG_CDN_URL + item?.cloudinaryImageId}
-                />
+                <div className="flex flex-col">
+                  <img
+                    className="w-[137px] mr-5"
+                    src={IMG_CDN_URL + item?.cloudinaryImageId}
+                  />
+                  <button
+                    className="bg-green-500 my-2 mr-5"
+                    onClick={() => addFoodItem(item)}
+                  >
+                    Add Item
+                  </button>
+                </div>
               </div>
             </div>
           ))}

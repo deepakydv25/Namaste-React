@@ -18,7 +18,7 @@ const Coursel = () => {
   return (
     <div className="bg-[rgb(23,26,41)] px-5 py-0 object-containe">
       <div className="h-[340px] flex max-w-[1200px] min-w-[1200px] items-center mx-0 my-0 relative">
-        <div className=" flex relative w-full">
+        <div className=" flex w-full">
           {Object.values(courselRestaurant).map((card) => (
             <img
               className="w-[260px] h-[260px] mr-[45px] transition ease-in-out delay-150 hover:translate-y-1 hover:scale-110 duration-300 cursor-pointer"
